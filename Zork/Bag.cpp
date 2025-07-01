@@ -10,7 +10,7 @@ Bag::Bag(string name, string description, bool isPickeable, bool isStoreable, ve
 	items = itemList;
 }
 
-vector<Item*> Bag::GetItems()
+vector<Item*> Bag::Items()
 {
 	return items;
 }
