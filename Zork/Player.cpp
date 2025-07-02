@@ -1,11 +1,12 @@
 #include "Player.h"
 
-Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst) : Character(name, description)
+Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
 	playerCurrentHunger = currentHunger;
 	playerMaxThirst = maxThirst;
 	playerCurrentThirst = currentThirst;
+	playerCurrentRoom = currentRoom;
 }
 
 int Player::MaxHunger()
