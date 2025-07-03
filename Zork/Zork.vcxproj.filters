@@ -40,6 +40,9 @@
     <ClCompile Include="Exit.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Scenario.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h">
@@ -72,5 +75,6 @@
     <ClInclude Include="Exit.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
+    <ClInclude Include="Scenario.h" />
   </ItemGroup>
 </Project>

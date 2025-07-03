@@ -1,4 +1,6 @@
+#include "Room.h"
 #include "Exit.h"
+
 
 Exit::Exit(string name, string direction1, string direction2, Room* room1, Room* room2, bool needCode, string code)
 {

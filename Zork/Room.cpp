@@ -1,4 +1,8 @@
+#include "Exit.h"
 #include "Room.h"
+#include "Character.h"
+#include "Item.h"
+
 
 Room::Room(string name, string description, vector<Item*> items, vector<Character*> characters, vector<Exit*> exits)
 {

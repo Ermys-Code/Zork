@@ -2,9 +2,10 @@
 
 #include <string>
 #include <vector>
-#include "Item.h"
-#include "Character.h"
-#include "Exit.h"
+
+class Exit;
+class Item;
+class Character;
 
 using namespace std;
 

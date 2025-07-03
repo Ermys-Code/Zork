@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include "Room.h"
+
+class Room;
 
 using namespace std;
 
