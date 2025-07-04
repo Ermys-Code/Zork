@@ -66,7 +66,7 @@ Scenario::Scenario()
     rooms.push_back(laboratory);
     rooms.push_back(controlRoom);
 
-    player = new Player("Player", "Player", 10, 5, 10, 5, cryostasisChamber);
+    player = new Player("Player", "Player", 10, 5, 10, 5, diningRoom);
 }
 
 vector<Room*> Scenario::GetRooms()
@@ -77,4 +77,22 @@ vector<Room*> Scenario::GetRooms()
 Player* Scenario::GetPlayer()
 {
     return player;
+}
+
+void Scenario::DescribePlayerRoom()
+{
+    Room* currentRoom = player->CurrentRoom();
+    cout << currentRoom->Name() << "\n";
+    cout << currentRoom->Description() << "\n";
+    if (currentRoom->HasItems()) {
+        cout << "Items:\n";
+        currentRoom->ReadItems();
+    }
+}
+
+string Scenario::AskForCommand()
+{
+    string command;
+    cin >> command;
+    return command;
 }

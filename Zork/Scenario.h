@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include "Room.h"
 #include "Player.h"
@@ -20,5 +21,7 @@ public:
 
 	vector<Room*> GetRooms();	//Returns a vector that contains all the rooms in the game
 	Player* GetPlayer();		//Returns the player
+	void DescribePlayerRoom();
+	string AskForCommand();
 };
 

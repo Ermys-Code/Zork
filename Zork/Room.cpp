@@ -79,3 +79,18 @@ void Room::AddExit(Exit* exit)
 {
     roomExits.push_back(exit);
 }
+
+bool Room::HasItems()
+{
+    return roomItems.size() != 0;
+}
+
+void Room::ReadItems()
+{
+    if (roomItems.size() == 0) return;
+
+    for (size_t i = 0; i < roomItems.size(); i++)
+    {
+        cout << roomItems[i]->Name() << ": " << roomItems[i]->Description() << "\n";
+    }
+}

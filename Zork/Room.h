@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -26,10 +27,12 @@ public:
 	vector<Item*> Items();						//Returns all the items that the room has
 	void AddItem(Item* item);					//Adds an item to the room
 	void RemoveItem(Item* item);				//Removes an item from the room
-	vector<Character*> Characters();				//Returns all the characters that the room has
+	vector<Character*> Characters();			//Returns all the characters that the room has
 	void AddCharacter(Character* character);	//Adds a character to the room
 	void RemoveCharacter(Character* character);	//Removes a character from the room
 	vector<Exit*> Exits();						//Returns all the exits that the room has
 	void AddExit(Exit* exit);					//Adds an exit to the room
+	bool HasItems();							//Returns if the room has items inside
+	void ReadItems();							//Prints the name and the description of all the items in the room
 };
 
