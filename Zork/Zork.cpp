@@ -5,7 +5,14 @@ int main()
 {
     Scenario scenario;
 
-    cout << scenario.GetRooms()[0]->Name();
+    cout << "WELCOME TO FIX YOUR CRYOCAPSULE" << "\n";
+    cout << "-------------------------------" << "\n";
+    cout << "Restart your cryostasis capsule and go back to your sleep and dont starve in the process." << "\n\n\n";
+    while (true)
+    {
+        
+    }
+
     
     return 0;
 }
