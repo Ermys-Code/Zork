@@ -91,6 +91,18 @@ void Room::ReadItems()
 
     for (size_t i = 0; i < roomItems.size(); i++)
     {
-        cout << roomItems[i]->Name() << ": " << roomItems[i]->Description() << "\n";
+        cout << "- " << roomItems[i]->Name() << "\n";
     }
+
+    cout << "\n";
+}
+
+Room* Room::HasExitOfDirection(string direction)
+{
+    for (size_t i = 0; i < roomExits.size(); i++)
+    {
+        if (roomExits[i]->HasDirection(direction, this)) return roomExits[i]->GetRoomOnDirection(direction);
+    }
+
+    return nullptr;
 }

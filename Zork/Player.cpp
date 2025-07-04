@@ -1,5 +1,26 @@
 #include "Player.h"
 
+void Player::Go(vector<string> args)
+{
+	string direction = args[1];
+
+	Room* room = playerCurrentRoom->HasExitOfDirection(direction);
+	if(room != nullptr){
+		playerCurrentRoom = room;
+	}
+	else
+	{
+		cout << "I can't go that way.";
+	}
+}
+
+void Player::Help()
+{
+	cout << "\n";
+	cout << "Help: Shows all commands\n";
+	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
+}
+
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
@@ -56,4 +77,35 @@ void Player::RemoveItem(Item* item)
 Room* Player::CurrentRoom()
 {
 	return playerCurrentRoom;
+}
+
+void Player::ExecuteCommand(vector<string> args)
+{
+	if (args[0] == "help") Help();
+	else if (args[0] == "go") Go(args);
+	else if (args[0] == "north") {
+		args.push_back("north");
+		Go(args);
+	}
+	else if (args[0] == "south") {
+		args.push_back("south");
+		Go(args);
+	}
+	else if (args[0] == "east") {
+		args.push_back("east");
+		Go(args);
+	}
+	else if (args[0] == "west") {
+		args.push_back("west");
+		Go(args);
+	}
+	else cout << "\nI can't do that";
+}
+
+void Player::ReadStatistics()
+{
+	cout << "Player stats:\n";
+	cout << "Hunger: " << playerCurrentHunger << " / " << playerMaxHunger << "\n";
+	cout << "Thirst: " << playerCurrentThirst << " / " << playerMaxThirst << "\n";
+	cout << "\n";
 }

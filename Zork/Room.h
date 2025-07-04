@@ -34,5 +34,6 @@ public:
 	void AddExit(Exit* exit);					//Adds an exit to the room
 	bool HasItems();							//Returns if the room has items inside
 	void ReadItems();							//Prints the name and the description of all the items in the room
+	Room* HasExitOfDirection(string direction);	//Returns the following room if this room has an exit to the specified direction
 };
 

@@ -51,3 +51,15 @@ string Exit::Code()
 {
 	return exitCode;
 }
+
+bool Exit::HasDirection(string direction, Room* room)
+{
+	if (exitRoom1 == room) return exitDirection2 == direction;
+	else return exitDirection1 == direction;
+}
+
+Room* Exit::GetRoomOnDirection(string direction)
+{
+	if (direction == exitDirection1) return exitRoom1;
+	else return exitRoom2;
+}

@@ -9,6 +9,15 @@
 #include "Weapon.h"
 #include "ControlPanel.h"
 
+string Scenario::ToLower(string command)
+{
+    string result = command;
+    for (char& c : result) {
+        c = tolower(static_cast<unsigned char>(c));
+    }
+    return result;
+}
+
 Scenario::Scenario()
 {
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 10);
@@ -83,16 +92,38 @@ void Scenario::DescribePlayerRoom()
 {
     Room* currentRoom = player->CurrentRoom();
     cout << currentRoom->Name() << "\n";
-    cout << currentRoom->Description() << "\n";
+    cout << currentRoom->Description() << "\n\n";
     if (currentRoom->HasItems()) {
         cout << "Items:\n";
         currentRoom->ReadItems();
     }
+    player->ReadStatistics();
 }
 
 string Scenario::AskForCommand()
 {
     string command;
     cin >> command;
+    command = ToLower(command);
     return command;
+}
+
+vector<string> Scenario::ProcessCommand(string command)
+{
+    vector<string> args;
+    const char* iterator = command.c_str();
+    
+    do 
+    {
+        const char* begin = iterator;
+
+        while (*iterator != ' ' && *iterator)
+        {
+            iterator++;
+        }
+
+        args.push_back(string(begin, iterator));
+    } while (0 != *iterator++);
+    
+    return args;
 }
