@@ -19,7 +19,7 @@ private:
 	vector<Exit*> roomExits;			//The exits that the room has
 
 public:
-	Room(string name, string description, vector<Item*> items, vector<Character*> characters, vector<Exit*> exits); //Constructor of the Room class
+	Room(string name, string description, vector<Item*> items, vector<Character*> characters); //Constructor of the Room class
 
 	string Name();								//Returns the name of the room
 	string Description();						//Returns the description of the room
@@ -31,6 +31,5 @@ public:
 	void RemoveCharacter(Character* character);	//Removes a character from the room
 	vector<Exit*> Exits();						//Returns all the exits that the room has
 	void AddExit(Exit* exit);					//Adds an exit to the room
-	void RemoveExit(Exit* exit);				//Removes an exit from the room
 };
 

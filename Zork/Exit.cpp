@@ -2,20 +2,24 @@
 #include "Exit.h"
 
 
-Exit::Exit(string name, string direction1, string direction2, Room* room1, Room* room2, bool needCode, string code)
+Exit::Exit(string direction1, string direction2, Room* room1, Room* room2, string code)
 {
-	exitName = name;
 	exitDirection1 = direction1;
 	exitDirection2 = direction2;
 	exitRoom1 = room1;
 	exitRoom2 = room2;
-	exitNeedCode = needCode;
+	exitNeedCode = true;
 	exitCode = code;
 }
 
-string Exit::Name()
+Exit::Exit(string direction1, string direction2, Room* room1, Room* room2)
 {
-	return exitName;
+	exitDirection1 = direction1;
+	exitDirection2 = direction2;
+	exitRoom1 = room1;
+	exitRoom2 = room2;
+	exitNeedCode = false;
+	exitCode = "";
 }
 
 string Exit::Direction1()

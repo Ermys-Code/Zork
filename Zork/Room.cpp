@@ -4,13 +4,12 @@
 #include "Item.h"
 
 
-Room::Room(string name, string description, vector<Item*> items, vector<Character*> characters, vector<Exit*> exits)
+Room::Room(string name, string description, vector<Item*> items, vector<Character*> characters)
 {
     roomName = name;
     roomDescription = description;
     roomItems = items;
     roomCharacters = characters;
-    roomExits = exits;
 }
 
 string Room::Name()
@@ -79,18 +78,4 @@ vector<Exit*> Room::Exits()
 void Room::AddExit(Exit* exit)
 {
     roomExits.push_back(exit);
-}
-
-void Room::RemoveExit(Exit* exit)
-{
-    if (exit == nullptr) return;
-
-    for (size_t i = 0; i < roomExits.size(); i++)
-    {
-        if (roomExits[i]->Name() == exit->Name())
-        {
-            roomExits.erase(roomExits.begin() + i);
-            return;
-        }
-    }
 }

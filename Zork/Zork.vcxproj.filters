@@ -13,7 +13,7 @@
     <ClCompile Include="Item.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Bag.cpp">
+    <ClCompile Include="Container.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Consumable.cpp">
@@ -43,12 +43,15 @@
     <ClCompile Include="Scenario.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="ControlPanel.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="Bag.h">
+    <ClInclude Include="Container.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
     <ClInclude Include="Consumable.h">
@@ -75,6 +78,9 @@
     <ClInclude Include="Exit.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="Scenario.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlPanel.h" />
   </ItemGroup>
 </Project>

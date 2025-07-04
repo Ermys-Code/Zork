@@ -139,9 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bag.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Consumable.cpp" />
+    <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -153,9 +154,10 @@
     <ClCompile Include="Zork.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bag.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Consumable.h" />
+    <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Item.h" />
