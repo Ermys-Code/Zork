@@ -24,6 +24,7 @@ void Player::Help()
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
 	cout << "Take <item>: Takes the item from the location and stores in your inventory\n";
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
+	cout << "Examine <item>: Examine the specified item\n";
 }
 
 void Player::Take(vector<string> args)
@@ -86,6 +87,27 @@ void Player::Drop(vector<string> args)
 	playerCurrentRoom->AddItem(item);
 	RemoveItem(item);
 	cout << item->Name() << " dropped";
+}
+
+void Player::Examine(vector<string> args)
+{
+	if (args.size() < 2) {
+		cout << "I don't know what to examine...\n";
+		return;
+	}
+
+	Item* item = GetItem(args[1]);
+
+	if (item == nullptr) {
+		cout << "I don't have that";
+		return;
+	}
+
+	cout << item->Description() << "\n";
+	Container* bag = dynamic_cast<Container*>(item);
+	if (bag != nullptr) {
+		bag->ReadItems();
+	}
 }
 
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
@@ -170,6 +192,7 @@ void Player::ExecuteCommand(vector<string> args)
 	}
 	else if (args[0] == "take") Take(args);
 	else if (args[0] == "drop") Drop(args);
+	else if (args[0] == "examine") Examine(args);
 	else cout << "\nI can't do that";
 }
 

@@ -8,6 +8,10 @@ Item::Item(string name, string description, bool isPickeable, bool isStoreable)
 	storeable = isStoreable;
 }
 
+Item::~Item()
+{
+}
+
 string Item::Name()
 {
 	return itemName;

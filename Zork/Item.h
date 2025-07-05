@@ -14,6 +14,7 @@ private:
 
 public:
 	Item(string name, string description, bool isPickeable, bool isStoreable); //Constructor of the base class Item
+	virtual ~Item();
 
 	string Name();			//Returns the name of the item
 	string Description();	//Returns the description of the item

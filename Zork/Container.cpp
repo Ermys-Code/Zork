@@ -34,3 +34,12 @@ void Container::RemoveItem(Item* item)
 	}
 }
 
+void Container::ReadItems()
+{
+	cout << "Contains:\n";
+	for (size_t i = 0; i < items.size(); i++)
+	{
+		cout << "- " << items[i]->Name() << "\n";
+	}
+}
+

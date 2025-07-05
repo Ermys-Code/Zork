@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Item.h"
 #include "Room.h"
+#include "Container.h"
 
 class Player : public Character
 {
@@ -21,6 +22,7 @@ private:
 	void Inventory();
 	void Look();
 	void Drop(vector<string> args);
+	void Examine(vector<string> args);
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class

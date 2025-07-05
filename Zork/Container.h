@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Item.h"
+#include <iostream>
 #include <vector>
+#include "Item.h"
 
 class Container : public Item
 {
@@ -15,5 +16,6 @@ public:
 	vector<Item*> Items();			//Returns a list of pointers, where each pointer points to one element that is inside the bag
 	void AddItem(Item* item);		//Adds the recived item pointer to the items list
 	void RemoveItem(Item* item);	//Removes the recived item pointer from the items list
+	void ReadItems();				//Prints a list of all the items that the container has in his inventory
 };
 
