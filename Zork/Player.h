@@ -7,6 +7,11 @@
 #include "Container.h"
 #include "Usb.h"
 #include "Exit.h"
+#include "Consumable.h"
+#include "ControlPanel.h"
+#include "Weapon.h"
+#include "Enemy.h"
+
 
 class Player : public Character
 {
@@ -27,6 +32,7 @@ private:
 	void Examine(vector<string> args);
 	void Store(vector<string> args);
 	void Use(vector<string> args);
+	void Shoot(vector<string> args);
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class

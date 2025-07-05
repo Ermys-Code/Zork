@@ -12,6 +12,7 @@ private:
 
 public:
 	Character(string name, string description);	//The constructor of the character class
+	virtual ~Character();
 
 	string Name();			//Returns the name of the character
 	string Description();	//Returns the description of the character

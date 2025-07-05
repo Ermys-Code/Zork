@@ -16,4 +16,5 @@ public:
 	int Damage();		//Returns the damage that the weapon deals
 	int MaxAmmo();		//Returns the maximum ammo that the weapon can hold
 	int CurrentAmmo();	//Returns the current ammo that the weapon has
+	bool Shoot();		//Shoots the weapon
 };

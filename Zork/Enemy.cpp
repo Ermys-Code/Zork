@@ -21,3 +21,9 @@ int Enemy::CurrentHealth()
 {
 	return enemyCurrentHealth;
 }
+
+void Enemy::GetDamage(int damage)
+{
+	enemyCurrentHealth -= damage;
+	if (enemyCurrentHealth < 0) enemyCurrentHealth = 0;
+}

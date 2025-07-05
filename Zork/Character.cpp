@@ -6,6 +6,10 @@ Character::Character(string name, string description)
 	characterDescription = description;
 }
 
+Character::~Character()
+{
+}
+
 string Character::Name()
 {
 	return characterName;

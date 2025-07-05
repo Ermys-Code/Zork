@@ -40,7 +40,9 @@ void Player::Help()
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
 	cout << "Store <item> in <container>: Stores the item in the container\n";
+	cout << "Use <item>: Uses the item\n";
 	cout << "Use <item> in <item>: Uses the first item in the second item\n";
+	cout << "Shoot <target>: Shoot at the target if you have a weapon in the inventory\n";
 }
 
 void Player::Take(vector<string> args)
@@ -225,12 +227,54 @@ void Player::Store(vector<string> args)
 void Player::Use(vector<string> args)
 {
 	if (args.size() < 2 || args.size() > 4) {
-		cout << "I don't what to use...";
+		cout << "I don't know what to use...";
 		return;
 	}
 
 	if (args.size() == 2) {
+		Item* item = GetItem(args[1]);
 
+		if (item == nullptr) {
+
+			if (args[1] == "panel") {
+				item = playerCurrentRoom->GetItem(args[1]);
+			}
+			if (item == nullptr) {
+				cout << "I don't have that";
+				return;
+			}
+		}
+
+		Consumable* consumable = dynamic_cast<Consumable*>(item);
+		if (consumable != nullptr) {
+			if (consumable->Effect() == Hunger) {
+				playerCurrentHunger += consumable->Strength();
+				if (playerCurrentHunger > playerMaxHunger) playerCurrentHunger = playerMaxHunger;
+			}
+			else if (consumable->Effect() == Thirst) {
+				playerCurrentThirst += consumable->Strength();
+				if (playerCurrentThirst > playerMaxThirst) playerCurrentThirst = playerMaxThirst;
+			}
+
+			cout << consumable->Name() << " has been consumed\n";
+			RemoveItem(consumable);
+			return;
+		}
+
+		ControlPanel* panel = dynamic_cast<ControlPanel*>(item);
+		if (panel != nullptr) {
+			if (!panel->IsActive()) {
+				panel->ActivatePanel();
+				cout << "The cryostasis capsule has been restored";
+			}
+			else {
+				cout << "The cryostasis capsule is already restarted.";
+			}
+			return;
+		}
+
+		cout << "I can't use that";
+		return;
 	}
 	else if (args.size() == 4) {
 		if (args[2] != "in") {
@@ -274,6 +318,49 @@ void Player::Use(vector<string> args)
 	}
 	else {
 		cout << "I don't what to use...";
+	}
+}
+
+void Player::Shoot(vector<string> args)
+{
+	if (args.size() != 2) {
+		cout << "I don't know who is that";
+		return;
+	}
+
+	Item* itemPistol = GetItem("pistol");
+
+	if (itemPistol == nullptr) {
+		cout << "I don't have a weapon";
+		return;
+	}
+
+	Character* characterEnemy = playerCurrentRoom->GetCharacter(args[1]);
+	if (characterEnemy == nullptr) {
+		cout << "I can't see anyone to shoot...";
+		return;
+	}
+
+	Enemy* enemy = dynamic_cast<Enemy*>(characterEnemy);
+	if (enemy != nullptr) {
+		cout << "I can't do that...";
+		return;
+	}
+
+	Weapon* pistol = dynamic_cast<Weapon*>(itemPistol);
+	if (pistol->Shoot()) {
+		cout << "You shoot";
+		enemy->GetDamage(pistol->Damage());
+		if (enemy->CurrentHealth() == 0) {
+			playerCurrentRoom->RemoveCharacter(characterEnemy);
+			cout << enemy->Name() << " has been killed";
+		}
+		else {
+			cout << enemy->Name() << " is still alive";
+		}
+	}
+	else {
+		cout << "You're out of ammo";
 	}
 }
 

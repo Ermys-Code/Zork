@@ -12,7 +12,7 @@
 Scenario::Scenario()
 {
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 10);
-    Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Hunger, 10);
+    Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 10);
     Item* usb = new Usb("USB", "USB with a label that says code.", true, true, "3068");
     Item* bag = new Container("Bag", "Small bag to store things.", true, false, vector<Item*> {usb});
     Item* pistol = new Weapon("Pistol", "Small plasma pistol.", true, true, 10, 5);

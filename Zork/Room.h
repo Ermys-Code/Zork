@@ -37,5 +37,6 @@ public:
 	void ReadItems();							//Prints the name and the description of all the items in the room
 	Exit* HasExitOfDirection(string direction);	//Returns the exit if this room has an exit to the specified direction
 	Item* GetItem(string name);					//Search in the item list of the room and return the item that matches with the name
+	Character* GetCharacter(string name);		//Search in the character list of the room and return the character that matches with the name
 };
 

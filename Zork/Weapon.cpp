@@ -28,3 +28,11 @@ int Weapon::CurrentAmmo()
 {
 	return weaponCurrentAmmo;
 }
+
+bool Weapon::Shoot()
+{
+	if (weaponCurrentAmmo == 0) return false;
+
+	weaponCurrentAmmo--;
+	return true;
+}

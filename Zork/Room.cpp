@@ -116,3 +116,13 @@ Item* Room::GetItem(string name)
 
     return nullptr;
 }
+
+Character* Room::GetCharacter(string name)
+{
+    for (size_t i = 0; i < roomCharacters.size(); i++)
+    {
+        if (ToLower(roomCharacters[i]->Name()) == name) return roomCharacters[i];
+    }
+
+    return nullptr;
+}

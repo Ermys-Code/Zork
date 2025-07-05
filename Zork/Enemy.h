@@ -12,7 +12,8 @@ public:
 	Enemy(string name, string description, int maxHealth);						//Constructor of the class Enemy, that sets the current health to the maximum health
 	Enemy(string name, string description, int maxHealth, int currentHealth);	//Constructor of the class Enemy, that sets the current health and the max health
 
-	int MaxHealth();		//Returns the maximum health of the enemy
-	int CurrentHealth();	//Returns the current health of the enemy 
+	int MaxHealth();			//Returns the maximum health of the enemy
+	int CurrentHealth();		//Returns the current health of the enemy 
+	void GetDamage(int damage);	//Substract the damage from the current health
 };
 
