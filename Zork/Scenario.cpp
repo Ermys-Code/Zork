@@ -11,13 +11,16 @@
 
 Scenario::Scenario()
 {
+    Character* alien = new Enemy("Alien", "A big, green and fast alien with intention to kill you.", 10);
+
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 10);
     Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 10);
     Item* usb = new Usb("USB", "USB with a label that says code.", true, true, "3068");
     Item* bag = new Container("Bag", "Small bag to store things.", true, false, vector<Item*> {usb});
     Item* pistol = new Weapon("Pistol", "Small plasma pistol.", true, true, 10, 5);
     Item* computer = new Container("Computer", "Computer with an usb port.", false, false);
-    Item* controlPanel = new ControlPanel("Panel", "Control panel used to restart the cryostasis capsules.", false, false);
+    Item* controlPanel = new ControlPanel("Panel", "Control panel used to restart the cryostasis capsules.", false, false, alien);
+
     
     Room* cryostasisChamber = new Room("Cryostasis Chamber", "A room with 3 cryostasis capsules where your crewmates sleep.", vector<Item*> {}, vector<Character*> {});
     Room* diningRoom = new Room("Dining Room", "A rounded room with a table in the middle.", vector<Item*> {food}, vector<Character*> {});
@@ -28,6 +31,9 @@ Scenario::Scenario()
     Room* mainCorridor = new Room("Main Corridor", "A big corridor that connects the dining room with the laboratory and the control room.", vector<Item*> {}, vector<Character*> {});
     Room* laboratory = new Room("Laboratory", "A big laboratory to do experiments.", vector<Item*> {computer}, vector<Character*> {});
     Room* controlRoom = new Room("Control Room", "The control room of the spaceship", vector<Item*> {controlPanel}, vector<Character*> {});
+
+    ControlPanel* panel = dynamic_cast<ControlPanel*>(controlPanel);
+    panel->SetRoom(cryostasisChamber);
 
     Exit* cryostasisDiningExit = new Exit("east", "west", diningRoom, cryostasisChamber);
     Exit* roomCorridorDiningExit = new Exit("north", "south", roomCorridor, diningRoom);

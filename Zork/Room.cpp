@@ -126,3 +126,20 @@ Character* Room::GetCharacter(string name)
 
     return nullptr;
 }
+
+bool Room::HasCharacters()
+{
+    return roomCharacters.size() > 0;
+}
+
+void Room::ReadCharacters()
+{
+    if (roomCharacters.size() == 0) return;
+
+    for (size_t i = 0; i < roomCharacters.size(); i++)
+    {
+        cout << "- " << roomCharacters[i]->Name() << "\n";
+    }
+
+    cout << "\n";
+}

@@ -6,6 +6,11 @@ void Player::Go(vector<string> args)
 
 	Exit* exit = playerCurrentRoom->HasExitOfDirection(direction);
 
+	if (exit == nullptr) {
+		cout << "I can't go this way";
+		return;
+	}
+
 	if (exit->NeedCode()) {
 		cout << "Insert the code: ";
 		string code;
@@ -135,6 +140,10 @@ void Player::Look()
 		cout << "Items:\n";
 		playerCurrentRoom->ReadItems();
 	}
+	if (playerCurrentRoom->HasCharacters()) {
+		cout << "Characters:\n";
+		playerCurrentRoom->ReadCharacters();
+	}
 	ReadStatistics();
 }
 
@@ -179,6 +188,11 @@ void Player::Examine(vector<string> args)
 	Container* bag = dynamic_cast<Container*>(item);
 	if (bag != nullptr && bag->HasItems()) {
 		bag->ReadItems();
+	}
+
+	Weapon* weapon = dynamic_cast<Weapon*>(item);
+	if (weapon != nullptr) {
+		cout << "Ammo: " << weapon->CurrentAmmo() << " / " << weapon->MaxAmmo();
 	}
 }
 
@@ -265,7 +279,9 @@ void Player::Use(vector<string> args)
 		if (panel != nullptr) {
 			if (!panel->IsActive()) {
 				panel->ActivatePanel();
-				cout << "The cryostasis capsule has been restored";
+				cout << "The cryostasis capsule has been restored\n";
+				panel->GetRoom()->AddCharacter(panel->GetEnemy());
+				cout << "You hear animal like noises\n";
 			}
 			else {
 				cout << "The cryostasis capsule is already restarted.";
@@ -342,25 +358,25 @@ void Player::Shoot(vector<string> args)
 	}
 
 	Enemy* enemy = dynamic_cast<Enemy*>(characterEnemy);
-	if (enemy != nullptr) {
+	if (enemy == nullptr) {
 		cout << "I can't do that...";
 		return;
 	}
 
 	Weapon* pistol = dynamic_cast<Weapon*>(itemPistol);
 	if (pistol->Shoot()) {
-		cout << "You shoot";
+		cout << "You shoot\n";
 		enemy->GetDamage(pistol->Damage());
 		if (enemy->CurrentHealth() == 0) {
 			playerCurrentRoom->RemoveCharacter(characterEnemy);
-			cout << enemy->Name() << " has been killed";
+			cout << enemy->Name() << " has been killed\n";
 		}
 		else {
-			cout << enemy->Name() << " is still alive";
+			cout << enemy->Name() << " is still alive\n";
 		}
 	}
 	else {
-		cout << "You're out of ammo";
+		cout << "You're out of ammo\n";
 	}
 }
 
@@ -449,6 +465,7 @@ void Player::ExecuteCommand(vector<string> args)
 	else if (args[0] == "examine") Examine(args);
 	else if (args[0] == "store") Store(args);
 	else if (args[0] == "use") Use(args);
+	else if (args[0] == "shoot") Shoot(args);
 	else cout << "\nI can't do that";
 }
 
