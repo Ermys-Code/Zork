@@ -1,6 +1,6 @@
 #include "Player.h"
 
-void Player::Go(vector<string> args)
+int Player::Go(vector<string> args)
 {
 	string direction = args[1];
 
@@ -8,7 +8,7 @@ void Player::Go(vector<string> args)
 
 	if (exit == nullptr) {
 		cout << "I can't go this way";
-		return;
+		return 0;
 	}
 
 	if (exit->NeedCode()) {
@@ -17,7 +17,7 @@ void Player::Go(vector<string> args)
 		getline(cin, code);
 		if (code != exit->Code()) {
 			cout << "Incorrect code\n";
-			return;
+			return 0;
 		}
 	}
 
@@ -27,10 +27,12 @@ void Player::Go(vector<string> args)
 		playerCurrentRoom = room;
 		cout << "\n\n";
 		Look();
+		return 1;
 	}
 	else
 	{
 		cout << "I can't go that way.";
+		return 0;
 	}
 }
 
@@ -38,7 +40,8 @@ void Player::Help()
 {
 	cout << "\n";
 	cout << "Help: Shows all commands\n";
-	cout << "Inventory: Shows all the items on your inventory";
+	cout << "Inventory: Shows all the items on your inventory\n";
+	cout << "Stats: Shows all the stats of the player\n";
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
 	cout << "Take <item>: Takes the item from the location and stores it in your inventory\n";
 	cout << "Take <item> from <container>: Takes the item from the container and stores it in your inventory\n";
@@ -48,6 +51,12 @@ void Player::Help()
 	cout << "Use <item>: Uses the item\n";
 	cout << "Use <item> in <item>: Uses the first item in the second item\n";
 	cout << "Shoot <target>: Shoot at the target if you have a weapon in the inventory\n";
+	cout << "Sleep: Go back to sleep on your cryostasis capsule\n";
+}
+
+void Player::Stats()
+{
+	ReadStatistics();
 }
 
 void Player::Take(vector<string> args)
@@ -144,7 +153,6 @@ void Player::Look()
 		cout << "Characters:\n";
 		playerCurrentRoom->ReadCharacters();
 	}
-	ReadStatistics();
 }
 
 void Player::Drop(vector<string> args)
@@ -279,6 +287,7 @@ void Player::Use(vector<string> args)
 		if (panel != nullptr) {
 			if (!panel->IsActive()) {
 				panel->ActivatePanel();
+				playerCanSleep = true;
 				cout << "The cryostasis capsule has been restored\n";
 				panel->GetRoom()->AddCharacter(panel->GetEnemy());
 				cout << "You hear animal like noises\n";
@@ -380,6 +389,27 @@ void Player::Shoot(vector<string> args)
 	}
 }
 
+int Player::Sleep()
+{
+	if (ToLower(playerCurrentRoom->Name()) != "cryostasis chamber") {
+		cout << "There are not cryostasis chambers here.";
+		return 0;
+	}
+
+	if (!playerCanSleep) {
+		cout << "My cryostasis capsule still needs to be restarted";
+		return 0;
+	}
+
+	if (playerCurrentRoom->HasCharacters()) {
+		cout << "The Alien is in the middle";
+		return 0;
+	}
+
+	cout << "You go back to your sleep";
+	return 2;
+}
+
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
@@ -387,6 +417,7 @@ Player::Player(string name, string description, int maxHunger, int currentHunger
 	playerMaxThirst = maxThirst;
 	playerCurrentThirst = currentThirst;
 	playerCurrentRoom = currentRoom;
+	playerCanSleep = false;
 }
 
 int Player::MaxHunger()
@@ -438,40 +469,78 @@ Room* Player::CurrentRoom()
 	return playerCurrentRoom;
 }
 
-void Player::ExecuteCommand(vector<string> args)
+int Player::ExecuteCommand(vector<string> args)
 {
-	if (args[0] == "help") Help();
-	else if (args[0] == "inventory") Inventory();
-	else if (args[0] == "look") Look();
-	else if (args[0] == "go") Go(args);
+	if (args[0] == "help") {
+		Help();
+		return 0;
+	}
+	else if (args[0] == "inventory") {
+		Inventory();
+		return 0;
+	}
+	else if (args[0] == "stats") {
+		Stats();
+		return 0;
+	}
+	else if (args[0] == "look") {
+		Look();
+		return 0;
+	}
+	else if (args[0] == "go") {
+		return Go(args);
+	}
 	else if (args[0] == "north") {
 		args.push_back("north");
-		Go(args);
+		return Go(args);
 	}
 	else if (args[0] == "south") {
 		args.push_back("south");
-		Go(args);
+		return Go(args);
 	}
 	else if (args[0] == "east") {
 		args.push_back("east");
-		Go(args);
+		return Go(args);
 	}
 	else if (args[0] == "west") {
 		args.push_back("west");
-		Go(args);
+		return Go(args);
 	}
-	else if (args[0] == "take") Take(args);
-	else if (args[0] == "drop") Drop(args);
-	else if (args[0] == "examine") Examine(args);
-	else if (args[0] == "store") Store(args);
-	else if (args[0] == "use") Use(args);
-	else if (args[0] == "shoot") Shoot(args);
-	else cout << "\nI can't do that";
+	else if (args[0] == "take") {
+		Take(args);
+		return 0;
+	}
+	else if (args[0] == "drop") {
+		Drop(args);
+		return 0;
+	}
+	else if (args[0] == "examine") {
+		Examine(args);
+		return 0;
+	}
+	else if (args[0] == "store") {
+		Store(args);
+		return 0;
+	}
+	else if (args[0] == "use") {
+		Use(args);
+		return 0;
+	}
+	else if (args[0] == "shoot") {
+		Shoot(args);
+		return 0;
+	}
+	else if (args[0] == "sleep") {
+		return Sleep();
+	}
+	else {
+		cout << "\nI can't do that";
+		return 0;
+	}
 }
 
 void Player::ReadStatistics()
 {
-	cout << "Player stats:\n";
 	cout << "Hunger: " << playerCurrentHunger << " / " << playerMaxHunger << "\n";
 	cout << "Thirst: " << playerCurrentThirst << " / " << playerMaxThirst << "\n";
 	cout << "\n";
@@ -485,4 +554,13 @@ Item* Player::GetItem(string name)
 	}
 
 	return nullptr;
+}
+
+void Player::UpdateStats()
+{
+	playerCurrentHunger--;
+	playerCurrentThirst--;
+
+	if (playerCurrentHunger < 0) playerCurrentHunger = 0;
+	if (playerCurrentThirst < 0) playerCurrentThirst = 0;
 }

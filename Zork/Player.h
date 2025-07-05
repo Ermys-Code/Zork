@@ -22,9 +22,12 @@ private:
 	int playerCurrentThirst;		//Current thirst of the player
 	vector<Item*> playerInventory;	//List of item pointers that represents the player inventory
 	Room* playerCurrentRoom;		//The room where the player currently is
+	bool playerCanSleep;			//Indicates if the player can sleep and end the game
 
-	void Go(vector<string> args);
+
+	int Go(vector<string> args);
 	void Help();
+	void Stats();
 	void Take(vector<string> args);
 	void Inventory();
 	void Look();
@@ -33,6 +36,7 @@ private:
 	void Store(vector<string> args);
 	void Use(vector<string> args);
 	void Shoot(vector<string> args);
+	int Sleep();
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class
@@ -45,8 +49,9 @@ public:
 	void AddItem(Item* item);					//Adds an item to the inventory
 	void RemoveItem(Item* item);				//Removes an item from the inventory
 	Room* CurrentRoom();						//Returns the room where the player currently is
-	void ExecuteCommand(vector<string> args);	//Decides wich action execute based on the command
+	int ExecuteCommand(vector<string> args);	//Decides wich action execute based on the command
 	void ReadStatistics();
 	Item* GetItem(string name);
+	void UpdateStats();
 };
 

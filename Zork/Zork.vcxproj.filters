@@ -84,8 +84,10 @@
     <ClInclude Include="Scenario.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="ControlPanel.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalFunctions.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
   </ItemGroup>

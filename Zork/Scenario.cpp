@@ -13,8 +13,8 @@ Scenario::Scenario()
 {
     Character* alien = new Enemy("Alien", "A big, green and fast alien with intention to kill you.", 10);
 
-    Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 10);
-    Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 10);
+    Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 15);
+    Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 15);
     Item* usb = new Usb("USB", "USB with a label that says code.", true, true, "3068");
     Item* bag = new Container("Bag", "Small bag to store things.", true, false, vector<Item*> {usb});
     Item* pistol = new Weapon("Pistol", "Small plasma pistol.", true, true, 10, 5);
@@ -72,7 +72,7 @@ Scenario::Scenario()
     rooms.push_back(laboratory);
     rooms.push_back(controlRoom);
 
-    player = new Player("Player", "Player", 10, 5, 10, 5, diningRoom);
+    player = new Player("Player", "Player", 20, 10, 20, 10, cryostasisChamber);
 }
 
 vector<Room*> Scenario::GetRooms()
@@ -94,7 +94,6 @@ void Scenario::DescribePlayerRoom()
         cout << "Items:\n";
         currentRoom->ReadItems();
     }
-    player->ReadStatistics();
 }
 
 string Scenario::AskForCommand()

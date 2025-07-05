@@ -6,6 +6,8 @@ int main()
     Scenario scenario;
     string command;
     vector<string> args;
+    int result;
+    bool win;
 
     cout << "WELCOME TO FIX YOUR CRYOCAPSULE" << "\n";
     cout << "-------------------------------" << "\n";
@@ -18,7 +20,20 @@ int main()
     {
         command = scenario.AskForCommand();
         args = scenario.ProcessCommand(command);
-        scenario.GetPlayer()->ExecuteCommand(args);
+        result = scenario.GetPlayer()->ExecuteCommand(args);
+        if (result == 1) {
+            scenario.GetPlayer()->UpdateStats();
+            if (scenario.GetPlayer()->CurrentHunger() == 0 || scenario.GetPlayer()->CurrentThirst() == 0) {
+                cout << "You don't have more energy left in yout body";
+                win = false;
+                break;
+            }
+        }
+        else if(result == 2){
+            win = true;
+            break;
+        }
+
     
         cout << "\n\n\n";
     }
