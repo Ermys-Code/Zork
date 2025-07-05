@@ -10,17 +10,17 @@ int main()
     cout << "WELCOME TO FIX YOUR CRYOCAPSULE" << "\n";
     cout << "-------------------------------" << "\n";
     cout << "Restart your cryostasis capsule and go back to your sleep and dont starve in the process.";
+    cout << "\n\n\n\n\n";
+    scenario.DescribePlayerRoom();
+    cout << "\n";
+
     while (true)
     {
-        cout << "\n\n\n\n\n";
-
-        scenario.DescribePlayerRoom();
-        
-        cout << "\n";
-
-        getline(cin, command);
+        command = scenario.AskForCommand();
         args = scenario.ProcessCommand(command);
         scenario.GetPlayer()->ExecuteCommand(args);
+    
+        cout << "\n\n\n";
     }
 
     

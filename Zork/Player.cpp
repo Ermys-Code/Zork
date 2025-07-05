@@ -18,7 +18,41 @@ void Player::Help()
 {
 	cout << "\n";
 	cout << "Help: Shows all commands\n";
+	cout << "Inventory: Shows all the items on your inventory";
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
+	cout << "Take <item>: Takes the item from the location and stores in your inventory\n";
+}
+
+void Player::Take(vector<string> args)
+{
+	if (args.size() < 2) {
+		cout << "I don't know what to take...\n";
+		return;
+	}
+
+	Item* item = playerCurrentRoom->GetItem(args[1]);
+
+	if (item == nullptr) {
+		cout << "I can't find that here";
+		return;
+	}
+
+	AddItem(item);
+	playerCurrentRoom->RemoveItem(item);
+	cout << item->Name() << " taken";
+}
+
+void Player::Inventory()
+{
+	if (playerInventory.size() == 0) {
+		cout << "My inventory is empty\n";
+		return;
+	}
+
+	for (size_t i = 0; i < playerInventory.size(); i++)
+	{
+		cout << playerInventory[i]->Name() << "\n";
+	}
 }
 
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
@@ -82,6 +116,7 @@ Room* Player::CurrentRoom()
 void Player::ExecuteCommand(vector<string> args)
 {
 	if (args[0] == "help") Help();
+	else if (args[0] == "inventory") Inventory();
 	else if (args[0] == "go") Go(args);
 	else if (args[0] == "north") {
 		args.push_back("north");
@@ -99,6 +134,7 @@ void Player::ExecuteCommand(vector<string> args)
 		args.push_back("west");
 		Go(args);
 	}
+	else if (args[0] == "take") Take(args);
 	else cout << "\nI can't do that";
 }
 

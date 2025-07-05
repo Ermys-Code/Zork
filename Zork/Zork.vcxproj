@@ -145,6 +145,7 @@
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="GlobalFunctions.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />

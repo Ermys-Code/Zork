@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include "GlobalFunctions.h"
 #include "Room.h"
 #include "Player.h"
 
@@ -15,8 +16,6 @@ class Scenario
 private:
 	vector<Room*> rooms;	//All the rooms of the game
 	Player* player;			//The player
-
-	string ToLower(string command);
 
 public:
 	Scenario();	//The constructor of the scenario class

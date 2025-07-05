@@ -106,3 +106,13 @@ Room* Room::HasExitOfDirection(string direction)
 
     return nullptr;
 }
+
+Item* Room::GetItem(string name)
+{
+    for (size_t i = 0; i < roomItems.size(); i++)
+    {
+        if (ToLower(roomItems[i]->Name()) == name) return roomItems[i];
+    }
+
+    return nullptr;
+}

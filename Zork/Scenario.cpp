@@ -9,15 +9,6 @@
 #include "Weapon.h"
 #include "ControlPanel.h"
 
-string Scenario::ToLower(string command)
-{
-    string result = command;
-    for (char& c : result) {
-        c = tolower(static_cast<unsigned char>(c));
-    }
-    return result;
-}
-
 Scenario::Scenario()
 {
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 10);
@@ -103,7 +94,7 @@ void Scenario::DescribePlayerRoom()
 string Scenario::AskForCommand()
 {
     string command;
-    cin >> command;
+    getline(cin, command);
     command = ToLower(command);
     return command;
 }
