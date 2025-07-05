@@ -36,7 +36,7 @@ Scenario::Scenario()
     Exit* roomCorridorRoom3Exit = new Exit("west", "east", roomCorridor, room3);
     Exit* mainCorridorDiningExit = new Exit("west", "east", diningRoom, mainCorridor);
     Exit* mainCorridorLaboratoryExit = new Exit("north", "south", mainCorridor, laboratory);
-    Exit* mainCorridorControlRoomExit = new Exit("west", "east", mainCorridor, controlRoom);
+    Exit* mainCorridorControlRoomExit = new Exit("west", "east", mainCorridor, controlRoom, "3068");
 
     diningRoom->AddExit(cryostasisDiningExit);
     cryostasisChamber->AddExit(cryostasisDiningExit);

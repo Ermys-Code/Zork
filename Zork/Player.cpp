@@ -4,7 +4,20 @@ void Player::Go(vector<string> args)
 {
 	string direction = args[1];
 
-	Room* room = playerCurrentRoom->HasExitOfDirection(direction);
+	Exit* exit = playerCurrentRoom->HasExitOfDirection(direction);
+
+	if (exit->NeedCode()) {
+		cout << "Insert the code: ";
+		string code;
+		getline(cin, code);
+		if (code != exit->Code()) {
+			cout << "Incorrect code\n";
+			return;
+		}
+	}
+
+	Room* room = exit->GetRoomOnDirection(direction);
+
 	if(room != nullptr){
 		playerCurrentRoom = room;
 		cout << "\n\n";
@@ -57,31 +70,39 @@ void Player::Take(vector<string> args)
 		return;
 	}
 	else if (args.size() == 4 && args[2] == "from") {
-		Item* item = GetItem(args[3]);
+		Item* item;
+
+		if (args[3] == "computer") {
+			item = playerCurrentRoom->GetItem(args[3]);
+		}
+		else {
+			item = GetItem(args[3]);
+		}
+
 
 		if (item == nullptr) {
 			cout << "I don't have that";
 			return;
 		}
 
-		Container* bag = dynamic_cast<Container*>(item);
-		if (bag == nullptr) {
+		Container* container = dynamic_cast<Container*>(item);
+		if (container == nullptr) {
 			cout << "I can't take nothing from here";
 			return;
 		}
 
-		if (!bag->HasItems()) {
+		if (!container->HasItems()) {
 			cout << "There is nothing here";
 			return;
 		}
 
-		Item* itemToAdd = bag->GetItem(args[1]);
+		Item* itemToAdd = container->GetItem(args[1]);
 		if (itemToAdd == nullptr) {
 			cout << "I can't find that";
 			return;
 		}
 		AddItem(itemToAdd);
-		bag->RemoveItem(itemToAdd);
+		container->RemoveItem(itemToAdd);
 		cout << itemToAdd->Name() << " taken";
 
 		return;
@@ -144,8 +165,12 @@ void Player::Examine(vector<string> args)
 	Item* item = GetItem(args[1]);
 
 	if (item == nullptr) {
-		cout << "I don't have that";
-		return;
+
+		item = playerCurrentRoom->GetItem(args[1]);
+		if (item == nullptr) {
+			cout << "I don't have that";
+			return;
+		}
 	}
 
 	cout << item->Description() << "\n";
@@ -245,7 +270,7 @@ void Player::Use(vector<string> args)
 		computer->AddItem(itemUsb);
 		RemoveItem(itemUsb);
 		cout << "You insert the usb in the computer and a code shows in the screen: " << usb->Code();
-		computer.SetDescription("Computer with an usb port. It shows the code " + usb->Code() + " in the screen")
+		computer->SetDescription("Computer with an usb port. It shows the code " + usb->Code() + " in the screen");
 	}
 	else {
 		cout << "I don't what to use...";

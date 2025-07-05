@@ -22,7 +22,7 @@ string Item::Description()
 	return itemDescription;
 }
 
-string Item::SetDescription(string description)
+void Item::SetDescription(string description)
 {
 	itemDescription = description;
 }

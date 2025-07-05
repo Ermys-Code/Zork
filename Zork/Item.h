@@ -18,7 +18,7 @@ public:
 
 	string Name();								//Returns the name of the item
 	string Description();						//Returns the description of the item
-	string SetDescription(string description);	//Sets the description of the item to the description recived
+	void SetDescription(string description);	//Sets the description of the item to the description recived
 	bool IsPickeable();							//Returns if the item is pickeable
 	bool IsStoreable();							//Returns if the item is storeable
 };

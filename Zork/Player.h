@@ -6,6 +6,7 @@
 #include "Room.h"
 #include "Container.h"
 #include "Usb.h"
+#include "Exit.h"
 
 class Player : public Character
 {
