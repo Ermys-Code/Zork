@@ -26,6 +26,7 @@ void Player::Help()
 	cout << "Take <item> from <container>: Takes the item from the container and stores it in your inventory\n";
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
+	cout << "Store <item> in <container>: Stores the item in the container\n";
 }
 
 void Player::Take(vector<string> args)
@@ -153,6 +154,48 @@ void Player::Examine(vector<string> args)
 	}
 }
 
+void Player::Store(vector<string> args)
+{
+	if (args.size() != 4) {
+		cout << "I don't know how to do that";
+		return;
+	}
+
+	if (args[2] != "in") {
+		cout << "I don't know how to do that";
+		return;
+	}
+
+	Item* itemToStore = GetItem(args[1]);
+
+	if (itemToStore == nullptr) {
+		cout << "I don't have that";
+		return;
+	}
+
+	if (!itemToStore->IsStoreable()) {
+		cout << "It's too big to store it here";
+		return;
+	}
+
+	Item* itemContainer = GetItem(args[3]);
+
+	if (itemContainer == nullptr) {
+		cout << "I don't have that";
+		return;
+	}
+
+	Container* container = dynamic_cast<Container*>(itemContainer);
+	if (container == nullptr) {
+		cout << "I can't store anything here";
+		return;
+	}
+
+	container->AddItem(itemToStore);
+	RemoveItem(itemToStore);
+	cout << itemToStore->Name() << " stored in " << container->Name();
+}
+
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
@@ -236,6 +279,7 @@ void Player::ExecuteCommand(vector<string> args)
 	else if (args[0] == "take") Take(args);
 	else if (args[0] == "drop") Drop(args);
 	else if (args[0] == "examine") Examine(args);
+	else if (args[0] == "store") Store(args);
 	else cout << "\nI can't do that";
 }
 

@@ -23,6 +23,7 @@ private:
 	void Look();
 	void Drop(vector<string> args);
 	void Examine(vector<string> args);
+	void Store(vector<string> args);
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class
