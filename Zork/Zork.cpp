@@ -4,6 +4,7 @@
 int main()
 {
     Scenario scenario;
+
     string command;
     vector<string> args;
     int result;

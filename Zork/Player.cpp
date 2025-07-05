@@ -191,7 +191,13 @@ void Player::Examine(vector<string> args)
 
 		item = playerCurrentRoom->GetItem(args[1]);
 		if (item == nullptr) {
-			cout << "I don't have that";
+			Character* character = playerCurrentRoom->GetCharacter(args[1]);
+			if (character == nullptr) {
+				cout << "I don't have that";
+				return;
+			}
+
+			cout << character->Description() << "\n";
 			return;
 		}
 	}

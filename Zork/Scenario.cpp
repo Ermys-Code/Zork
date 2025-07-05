@@ -11,7 +11,7 @@
 
 Scenario::Scenario()
 {
-    Character* alien = new Enemy("Alien", "A big, green and fast alien with intention to kill you.", 10);
+    Character* alien = new Enemy("Alien", "A fast, green alien with intentions to kill you.", 10);
 
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 15);
     Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 15);
