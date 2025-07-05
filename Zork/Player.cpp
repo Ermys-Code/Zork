@@ -153,6 +153,10 @@ void Player::Look()
 		cout << "Characters:\n";
 		playerCurrentRoom->ReadCharacters();
 	}
+	if (playerCurrentRoom->HasExits()) {
+		cout << "Exits:\n";
+		playerCurrentRoom->ReadExits();
+	}
 }
 
 void Player::Drop(vector<string> args)

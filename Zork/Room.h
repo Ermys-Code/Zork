@@ -39,6 +39,8 @@ public:
 	Item* GetItem(string name);					//Search in the item list of the room and return the item that matches with the name
 	Character* GetCharacter(string name);		//Search in the character list of the room and return the character that matches with the name
 	bool HasCharacters();						//Returns if there is any character in the room
-	void ReadCharacters();							//Prints the name of all the characters in the room
+	void ReadCharacters();						//Prints the name of all the characters in the room
+	bool HasExits();							//Returns if the room has any exits
+	void ReadExits();							//Prints the name of all the exits in the room
 };
 

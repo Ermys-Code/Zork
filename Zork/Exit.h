@@ -27,6 +27,7 @@ public:
 	bool NeedCode();									//Returns if the door needs a code to be opened
 	string Code();										//Returns the code that the door needs to be opened
 	bool HasDirection(string direction, Room* room);	//Returns if the direction exist in the exit for the room recived
-	Room* GetRoomOnDirection(string direction);							//Returns the room in the specified direction
+	Room* GetRoomOnDirection(string direction);			//Returns the room in the specified direction
+	int GetDirectionFromRoom(Room* room);				//Returns an int representing the direction of each exit from the recived room
 };
 

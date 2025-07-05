@@ -94,6 +94,14 @@ void Scenario::DescribePlayerRoom()
         cout << "Items:\n";
         currentRoom->ReadItems();
     }
+    if (currentRoom->HasCharacters()) {
+        cout << "Characters:\n";
+        currentRoom->ReadCharacters();
+    }
+    if (currentRoom->HasExits()) {
+        cout << "Exits:\n";
+        currentRoom->ReadExits();
+    }
 }
 
 string Scenario::AskForCommand()

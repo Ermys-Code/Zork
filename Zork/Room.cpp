@@ -143,3 +143,35 @@ void Room::ReadCharacters()
 
     cout << "\n";
 }
+
+bool Room::HasExits()
+{
+    return roomExits.size() > 0;
+}
+
+void Room::ReadExits()
+{
+    if (roomExits.size() == 0) return;
+
+    int dir;
+
+    for (size_t i = 0; i < roomExits.size(); i++)
+    {
+        dir = roomExits[i]->GetDirectionFromRoom(this);
+        switch (dir)
+        {
+        case 1:
+            cout << "- North\n";
+            break;
+        case 2:
+            cout << "- South\n";
+            break;
+        case 3:
+            cout << "- East\n";
+            break;
+        case 4:
+            cout << "- West\n";
+            break;
+        }
+    }
+}

@@ -63,3 +63,20 @@ Room* Exit::GetRoomOnDirection(string direction)
 	if (direction == exitDirection1) return exitRoom1;
 	else return exitRoom2;
 }
+
+int Exit::GetDirectionFromRoom(Room* room)
+{
+	if (room == exitRoom1) {
+		if (exitDirection2 == "north") return 1;
+		if (exitDirection2 == "south") return 2;
+		if (exitDirection2 == "east") return 3;
+		if (exitDirection2 == "west") return 4;
+	}
+	else if (room == exitRoom2) {
+		if (exitDirection1 == "north") return 1;
+		if (exitDirection1 == "south") return 2;
+		if (exitDirection1 == "east") return 3;
+		if (exitDirection1 == "west") return 4;
+	}
+	else return 0;
+}
