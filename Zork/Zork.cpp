@@ -24,7 +24,7 @@ int main()
         if (result == 1) {
             scenario.GetPlayer()->UpdateStats();
             if (scenario.GetPlayer()->CurrentHunger() == 0 || scenario.GetPlayer()->CurrentThirst() == 0) {
-                cout << "You don't have more energy left in yout body";
+                cout << "You don't have more energy left in yout body\n";
                 win = false;
                 break;
             }
@@ -38,6 +38,15 @@ int main()
         cout << "\n\n\n";
     }
 
+    if (win) {
+        cout << "\n\n\n\n\nYOU WIN\n";
+    }
+    else {
+        cout << "\n\n\n\n\nYOU LOSE\n";
+    }
+    cout << "Thanks for playing!\n\n\n";
+    cout << "Made by: Raul Rodriguez Trotonda\n";
+    cout << "Github: Ermys_Code\n";
     
     return 0;
 }
