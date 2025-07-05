@@ -16,9 +16,10 @@ public:
 	Item(string name, string description, bool isPickeable, bool isStoreable); //Constructor of the base class Item
 	virtual ~Item();
 
-	string Name();			//Returns the name of the item
-	string Description();	//Returns the description of the item
-	bool IsPickeable();		//Returns if the item is pickeable
-	bool IsStoreable();		//Returns if the item is storeable
+	string Name();								//Returns the name of the item
+	string Description();						//Returns the description of the item
+	string SetDescription(string description);	//Sets the description of the item to the description recived
+	bool IsPickeable();							//Returns if the item is pickeable
+	bool IsStoreable();							//Returns if the item is storeable
 };
 

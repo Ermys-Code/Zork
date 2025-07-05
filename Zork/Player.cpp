@@ -27,6 +27,7 @@ void Player::Help()
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
 	cout << "Store <item> in <container>: Stores the item in the container\n";
+	cout << "Use <item> in <item>: Uses the first item in the second item\n";
 }
 
 void Player::Take(vector<string> args)
@@ -157,7 +158,7 @@ void Player::Examine(vector<string> args)
 void Player::Store(vector<string> args)
 {
 	if (args.size() != 4) {
-		cout << "I don't know how to do that";
+		cout << "I don't know what to store...";
 		return;
 	}
 
@@ -194,6 +195,61 @@ void Player::Store(vector<string> args)
 	container->AddItem(itemToStore);
 	RemoveItem(itemToStore);
 	cout << itemToStore->Name() << " stored in " << container->Name();
+}
+
+void Player::Use(vector<string> args)
+{
+	if (args.size() < 2 || args.size() > 4) {
+		cout << "I don't what to use...";
+		return;
+	}
+
+	if (args.size() == 2) {
+
+	}
+	else if (args.size() == 4) {
+		if (args[2] != "in") {
+			cout << "I don't what to use...";
+			return;
+		}
+
+		Item* itemComputer = playerCurrentRoom->GetItem(args[3]);
+		if (itemComputer == nullptr) {
+			cout << "I can't find where to use it";
+			return;
+		}
+
+		Container* computer = dynamic_cast<Container*>(itemComputer);
+		if (computer == nullptr) {
+			cout << "I can't use this here";
+			return;
+		}
+
+		if (ToLower(computer->Name()) != "computer") {
+			cout << "I can't use this here";
+			return;
+		}
+
+		Item* itemUsb = GetItem(args[1]);
+		if (itemUsb == nullptr) {
+			cout << "I don't have that";
+			return;
+		}
+
+		Usb* usb = dynamic_cast<Usb*>(itemUsb);
+		if (usb == nullptr) {
+			cout << "I can't use that here";
+			return;
+		}
+
+		computer->AddItem(itemUsb);
+		RemoveItem(itemUsb);
+		cout << "You insert the usb in the computer and a code shows in the screen: " << usb->Code();
+		computer.SetDescription("Computer with an usb port. It shows the code " + usb->Code() + " in the screen")
+	}
+	else {
+		cout << "I don't what to use...";
+	}
 }
 
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
@@ -280,6 +336,7 @@ void Player::ExecuteCommand(vector<string> args)
 	else if (args[0] == "drop") Drop(args);
 	else if (args[0] == "examine") Examine(args);
 	else if (args[0] == "store") Store(args);
+	else if (args[0] == "use") Use(args);
 	else cout << "\nI can't do that";
 }
 

@@ -22,6 +22,11 @@ string Item::Description()
 	return itemDescription;
 }
 
+string Item::SetDescription(string description)
+{
+	itemDescription = description;
+}
+
 bool Item::IsPickeable()
 {
 	return pickeable;
