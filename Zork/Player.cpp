@@ -22,28 +22,71 @@ void Player::Help()
 	cout << "Help: Shows all commands\n";
 	cout << "Inventory: Shows all the items on your inventory";
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
-	cout << "Take <item>: Takes the item from the location and stores in your inventory\n";
+	cout << "Take <item>: Takes the item from the location and stores it in your inventory\n";
+	cout << "Take <item> from <container>: Takes the item from the container and stores it in your inventory\n";
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
 }
 
 void Player::Take(vector<string> args)
 {
-	if (args.size() < 2) {
+	if (args.size() < 2 || args.size() > 4) {
 		cout << "I don't know what to take...\n";
 		return;
 	}
 
-	Item* item = playerCurrentRoom->GetItem(args[1]);
+	if (args.size() == 2) {
+		Item* item = playerCurrentRoom->GetItem(args[1]);
 
-	if (item == nullptr) {
-		cout << "I can't find that here";
+		if (item == nullptr) {
+			cout << "I can't find that here";
+			return;
+		}
+
+		if (!item->IsPickeable()) {
+			cout << "I can't take that";
+			return;
+		}
+
+		AddItem(item);
+		playerCurrentRoom->RemoveItem(item);
+		cout << item->Name() << " taken";
+
 		return;
 	}
+	else if (args.size() == 4 && args[2] == "from") {
+		Item* item = GetItem(args[3]);
 
-	AddItem(item);
-	playerCurrentRoom->RemoveItem(item);
-	cout << item->Name() << " taken";
+		if (item == nullptr) {
+			cout << "I don't have that";
+			return;
+		}
+
+		Container* bag = dynamic_cast<Container*>(item);
+		if (bag == nullptr) {
+			cout << "I can't take nothing from here";
+			return;
+		}
+
+		if (!bag->HasItems()) {
+			cout << "There is nothing here";
+			return;
+		}
+
+		Item* itemToAdd = bag->GetItem(args[1]);
+		if (itemToAdd == nullptr) {
+			cout << "I can't find that";
+			return;
+		}
+		AddItem(itemToAdd);
+		bag->RemoveItem(itemToAdd);
+		cout << itemToAdd->Name() << " taken";
+
+		return;
+	}
+	else {
+		cout << "I don't know what to take...\n";
+	}
 }
 
 void Player::Inventory()
@@ -105,7 +148,7 @@ void Player::Examine(vector<string> args)
 
 	cout << item->Description() << "\n";
 	Container* bag = dynamic_cast<Container*>(item);
-	if (bag != nullptr) {
+	if (bag != nullptr && bag->HasItems()) {
 		bag->ReadItems();
 	}
 }

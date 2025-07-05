@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Item.h"
+#include "GlobalFunctions.h"
 
 class Container : public Item
 {
@@ -17,5 +18,7 @@ public:
 	void AddItem(Item* item);		//Adds the recived item pointer to the items list
 	void RemoveItem(Item* item);	//Removes the recived item pointer from the items list
 	void ReadItems();				//Prints a list of all the items that the container has in his inventory
+	bool HasItems();				//Returns if the container has items inside
+	Item* GetItem(string name);				//Returns the item that matches the name recived
 };
 

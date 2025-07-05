@@ -43,3 +43,21 @@ void Container::ReadItems()
 	}
 }
 
+bool Container::HasItems()
+{
+	return items.size() > 0;
+}
+
+Item* Container::GetItem(string name)
+{
+	for (size_t i = 0; i < items.size(); i++)
+	{
+		if (ToLower(items[i]->Name()) == name)
+		{
+			return items[i];
+		}
+	}
+
+	return nullptr;
+}
+
