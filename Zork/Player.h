@@ -20,6 +20,7 @@ private:
 	void Take(vector<string> args);
 	void Inventory();
 	void Look();
+	void Drop(vector<string> args);
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class
@@ -34,5 +35,6 @@ public:
 	Room* CurrentRoom();						//Returns the room where the player currently is
 	void ExecuteCommand(vector<string> args);	//Decides wich action execute based on the command
 	void ReadStatistics();
+	Item* GetItem(string name);
 };
 

@@ -66,6 +66,25 @@ void Player::Look()
 	ReadStatistics();
 }
 
+void Player::Drop(vector<string> args)
+{
+	if (args.size() < 2) {
+		cout << "I don't know what to drop...\n";
+		return;
+	}
+
+	Item* item = GetItem(args[1]);
+
+	if (item == nullptr) {
+		cout << "I don't have that";
+		return;
+	}
+
+	playerCurrentRoom->AddItem(item);
+	RemoveItem(item);
+	cout << item->Name() << " dropped";
+}
+
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
@@ -147,6 +166,7 @@ void Player::ExecuteCommand(vector<string> args)
 		Go(args);
 	}
 	else if (args[0] == "take") Take(args);
+	else if (args[0] == "drop") Drop(args);
 	else cout << "\nI can't do that";
 }
 
@@ -156,4 +176,14 @@ void Player::ReadStatistics()
 	cout << "Hunger: " << playerCurrentHunger << " / " << playerMaxHunger << "\n";
 	cout << "Thirst: " << playerCurrentThirst << " / " << playerMaxThirst << "\n";
 	cout << "\n";
+}
+
+Item* Player::GetItem(string name)
+{
+	for (size_t i = 0; i < playerInventory.size(); i++)
+	{
+		if (ToLower(playerInventory[i]->Name()) == name) return playerInventory[i];
+	}
+
+	return nullptr;
 }
