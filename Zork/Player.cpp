@@ -23,6 +23,7 @@ void Player::Help()
 	cout << "Inventory: Shows all the items on your inventory";
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
 	cout << "Take <item>: Takes the item from the location and stores in your inventory\n";
+	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 }
 
 void Player::Take(vector<string> args)
