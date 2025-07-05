@@ -7,6 +7,8 @@ void Player::Go(vector<string> args)
 	Room* room = playerCurrentRoom->HasExitOfDirection(direction);
 	if(room != nullptr){
 		playerCurrentRoom = room;
+		cout << "\n\n";
+		Look();
 	}
 	else
 	{
@@ -51,7 +53,7 @@ void Player::Inventory()
 
 	for (size_t i = 0; i < playerInventory.size(); i++)
 	{
-		cout << playerInventory[i]->Name() << "\n";
+		cout << "- " << playerInventory[i]->Name() << "\n";
 	}
 }
 
