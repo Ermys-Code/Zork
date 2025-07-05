@@ -19,6 +19,7 @@ private:
 	void Help();
 	void Take(vector<string> args);
 	void Inventory();
+	void Look();
 
 public:
 	Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom);	//Constructor of the Player class

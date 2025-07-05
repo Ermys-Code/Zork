@@ -55,6 +55,17 @@ void Player::Inventory()
 	}
 }
 
+void Player::Look()
+{
+	cout << "\n" << playerCurrentRoom->Name() << "\n";
+	cout << playerCurrentRoom->Description() << "\n\n";
+	if (playerCurrentRoom->HasItems()) {
+		cout << "Items:\n";
+		playerCurrentRoom->ReadItems();
+	}
+	ReadStatistics();
+}
+
 Player::Player(string name, string description, int maxHunger, int currentHunger, int maxThirst, int currentThirst, Room* currentRoom) : Character(name, description)
 {
 	playerMaxHunger = maxHunger;
@@ -117,6 +128,7 @@ void Player::ExecuteCommand(vector<string> args)
 {
 	if (args[0] == "help") Help();
 	else if (args[0] == "inventory") Inventory();
+	else if (args[0] == "look") Look();
 	else if (args[0] == "go") Go(args);
 	else if (args[0] == "north") {
 		args.push_back("north");
