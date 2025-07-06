@@ -43,13 +43,14 @@ void Player::Help()
 	cout << "Inventory: Shows all the items on your inventory\n";
 	cout << "Stats: Shows all the stats of the player\n";
 	cout << "Go <direction>: Moves to the specified direction. You can skip the word 'Go'\n";
+	cout << "Look: Describes the room where you currently are\n";
 	cout << "Take <item>: Takes the item from the location and stores it in your inventory\n";
 	cout << "Take <item> from <container>: Takes the item from the container and stores it in your inventory\n";
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
 	cout << "Store <item> in <container>: Stores the item in the container\n";
 	cout << "Use <item>: Uses the item\n";
-	cout << "Use <item> in <item>: Uses the first item in the second item\n";
+	cout << "Use <item> on <item>: Uses the first item in the second item\n";
 	cout << "Shoot <target>: Shoot at the target if you have a weapon in the inventory\n";
 	cout << "Sleep: Go back to sleep on your cryostasis capsule\n";
 }
@@ -312,7 +313,7 @@ void Player::Use(vector<string> args)
 		return;
 	}
 	else if (args.size() == 4) {
-		if (args[2] != "in") {
+		if (args[2] != "on") {
 			cout << "I don't what to use...";
 			return;
 		}

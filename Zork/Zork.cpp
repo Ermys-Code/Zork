@@ -20,6 +20,7 @@ int main()
     while (true)
     {
         command = scenario.AskForCommand();
+        if (command == "") continue;
         args = scenario.ProcessCommand(command);
         result = scenario.GetPlayer()->ExecuteCommand(args);
         if (result == 1) {
