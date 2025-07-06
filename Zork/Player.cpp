@@ -51,7 +51,7 @@ void Player::Help()
 	cout << "Examine <direction>: Examine the specified direction if it exist\n";
 	cout << "Store <item> in <container>: Stores the item in the container\n";
 	cout << "Use <item>: Uses the item\n";
-	cout << "Use <item> on <item>: Uses the first item in the second item\n";
+	cout << "Use <item> on <item>: Uses the first item on the second item\n";
 	cout << "Shoot <target>: Shoot at the target if you have a weapon in the inventory\n";
 	cout << "Sleep: Go back to sleep on your cryostasis capsule\n";
 }
