@@ -7,7 +7,7 @@ Simple text mode conversational game about an spaceship.
 The main goal of the game is to restart your cryocapsule so you can go back to your sleep.
 When you wake up you are thirsty and hungry, so you'll have to find food and water before is too late.
 To archive the main goal you can use the following commands:
-  - Help: Shows all commands
+	- Help: Shows all commands
 	- Inventory: Shows all the items on your inventory
 	- Stats: Shows all the stats of the player
 	- Go <direction>: Moves to the specified direction. You can skip the word 'Go'
