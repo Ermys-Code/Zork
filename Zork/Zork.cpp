@@ -10,12 +10,15 @@ int main()
     int result;
     bool win;
 
+
     cout << "WELCOME TO FIX YOUR CRYOCAPSULE" << "\n";
     cout << "-------------------------------" << "\n";
     cout << "Restart your cryostasis capsule and go back to your sleep and dont starve in the process.";
     cout << "\n\n\n\n\n";
     scenario.DescribePlayerRoom();
     cout << "\n";
+
+
 
     while (true)
     {
@@ -49,6 +52,9 @@ int main()
     cout << "Thanks for playing!\n\n\n";
     cout << "Made by: Raul Rodriguez Trotonda\n";
     cout << "Github: Ermys-Code\n";
+
+    cout << "\nPress enter to close...";
+    getchar();
     
     return 0;
 }
