@@ -48,6 +48,7 @@ void Player::Help()
 	cout << "Take <item> from <container>: Takes the item from the container and stores it in your inventory\n";
 	cout << "Drop <item>: Drops the item from your inventory to the current location\n";
 	cout << "Examine <item>: Examine the specified item\n";
+	cout << "Examine <direction>: Examine the specified direction if it exist\n";
 	cout << "Store <item> in <container>: Stores the item in the container\n";
 	cout << "Use <item>: Uses the item\n";
 	cout << "Use <item> on <item>: Uses the first item in the second item\n";
@@ -194,7 +195,13 @@ void Player::Examine(vector<string> args)
 		if (item == nullptr) {
 			Character* character = playerCurrentRoom->GetCharacter(args[1]);
 			if (character == nullptr) {
-				cout << "I don't have that";
+				Exit* exit = playerCurrentRoom->HasExitOfDirection(args[1]);
+				if (exit == nullptr) {
+					cout << "I don't have that";
+					return;
+				}
+
+				cout << "There is a sign, it reads: " << exit->GetRoomOnDirection(args[1])->Name();
 				return;
 			}
 

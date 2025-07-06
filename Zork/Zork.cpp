@@ -48,7 +48,7 @@ int main()
     }
     cout << "Thanks for playing!\n\n\n";
     cout << "Made by: Raul Rodriguez Trotonda\n";
-    cout << "Github: Ermys_Code\n";
+    cout << "Github: Ermys-Code\n";
     
     return 0;
 }
