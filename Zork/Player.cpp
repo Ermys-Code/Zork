@@ -579,6 +579,13 @@ void Player::UpdateStats()
 	playerCurrentHunger--;
 	playerCurrentThirst--;
 
+	if (playerCurrentHunger == 5) cout << "You're starting to get hungry.";
+	if (playerCurrentThirst == 5) cout << "You're starting to get thirsty.";
+
+	if (playerCurrentHunger == 2) cout << "You're really hungry.";
+	if (playerCurrentThirst == 2) cout << "You're really thirsty.";
+
 	if (playerCurrentHunger < 0) playerCurrentHunger = 0;
 	if (playerCurrentThirst < 0) playerCurrentThirst = 0;
+
 }

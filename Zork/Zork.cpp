@@ -28,8 +28,13 @@ int main()
         result = scenario.GetPlayer()->ExecuteCommand(args);
         if (result == 1) {
             scenario.GetPlayer()->UpdateStats();
-            if (scenario.GetPlayer()->CurrentHunger() == 0 || scenario.GetPlayer()->CurrentThirst() == 0) {
-                cout << "You don't have more energy left in yout body\n";
+            if (scenario.GetPlayer()->CurrentThirst() == 0) {
+                cout << "You died of thirst.\n";
+                win = false;
+                break;
+            }
+            else if (scenario.GetPlayer()->CurrentHunger() == 0) {
+                cout << "You starved to death.\n";
                 win = false;
                 break;
             }
