@@ -308,6 +308,7 @@ void Player::Use(vector<string> args)
 				playerCanSleep = true;
 				cout << "The cryostasis capsule has been restored\n";
 				panel->GetRoom()->AddCharacter(panel->GetEnemy());
+				panel->GetRoom()->GetItem("cryocapsule")->SetDescription("Your cryostasis capsule, now it works perfectly");
 				cout << "You hear animal like noises\n";
 			}
 			else {
@@ -579,11 +580,11 @@ void Player::UpdateStats()
 	playerCurrentHunger--;
 	playerCurrentThirst--;
 
-	if (playerCurrentHunger == 5) cout << "You're starting to get hungry.";
-	if (playerCurrentThirst == 5) cout << "You're starting to get thirsty.";
+	if (playerCurrentHunger == 5) cout << "You're starting to get hungry.\n";
+	if (playerCurrentThirst == 5) cout << "You're starting to get thirsty.\n";
 
-	if (playerCurrentHunger == 2) cout << "You're really hungry.";
-	if (playerCurrentThirst == 2) cout << "You're really thirsty.";
+	if (playerCurrentHunger == 2) cout << "You're really hungry.\n";
+	if (playerCurrentThirst == 2) cout << "You're really thirsty.\n";
 
 	if (playerCurrentHunger < 0) playerCurrentHunger = 0;
 	if (playerCurrentThirst < 0) playerCurrentThirst = 0;

@@ -30,12 +30,12 @@ int main()
         if (result == 1) {
             scenario.GetPlayer()->UpdateStats();
             if (scenario.GetPlayer()->CurrentThirst() == 0) {
-                cout << "You died of thirst.\n";
+                cout << "\n\nYou died of thirst.";
                 win = false;
                 break;
             }
             else if (scenario.GetPlayer()->CurrentHunger() == 0) {
-                cout << "You starved to death.\n";
+                cout << "\n\nYou starved to death.";
                 win = false;
                 break;
             }
