@@ -13,7 +13,8 @@ int main()
 
     cout << "WELCOME TO FIX YOUR CRYOCAPSULE" << "\n";
     cout << "-------------------------------" << "\n";
-    cout << "Restart your cryostasis capsule and go back to your sleep and dont starve in the process.";
+    cout << "Restart your cryostasis capsule and go back to your sleep.";
+    cout << "You are hungry and thirsty, find something to eat and drink.";
     cout << "\n\n\n\n\n";
     scenario.DescribePlayerRoom();
     cout << "\n";

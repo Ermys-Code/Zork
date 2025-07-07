@@ -77,7 +77,7 @@ void Player::Take(vector<string> args)
 		}
 
 		if (!item->IsPickeable()) {
-			cout << "I can't take that";
+			cout << "It is too big to take it";
 			return;
 		}
 

@@ -13,6 +13,8 @@ Scenario::Scenario()
 {
     Character* alien = new Enemy("Alien", "A fast, green alien with intentions to kill you.", 10);
 
+    Item* capsule = new Item("Cryocapsule", "Your cryostasis capsule, it needs to be restarted.", false, false);
+    Item* table = new Item("Table", "A round table used to eat.", false, false);
     Item* food = new Consumable("Food", "Cereal bar that doesn't expire.", true, true, Hunger, 15);
     Item* water = new Consumable("Water", "Water bottle with water that is always fresh.", true, true, Thirst, 15);
     Item* usb = new Usb("USB", "USB with a label that says code.", true, true, "3068");
@@ -22,8 +24,8 @@ Scenario::Scenario()
     Item* controlPanel = new ControlPanel("Panel", "Control panel used to restart the cryostasis capsules.", false, false, alien);
 
     
-    Room* cryostasisChamber = new Room("Cryostasis Chamber", "A room with 3 cryostasis capsules where your crewmates sleep.", vector<Item*> {}, vector<Character*> {});
-    Room* diningRoom = new Room("Dining Room", "A rounded room with a table in the middle.", vector<Item*> {food}, vector<Character*> {});
+    Room* cryostasisChamber = new Room("Cryostasis Chamber", "A room with 3 cryostasis capsules where your crewmates sleep.", vector<Item*> {capsule}, vector<Character*> {});
+    Room* diningRoom = new Room("Dining Room", "A rounded room with a table in the middle.", vector<Item*> {food, table}, vector<Character*> {});
     Room* roomCorridor = new Room("Room Corridor", "A small corridor with 3 separated rooms.", vector<Item*> {}, vector<Character*> {});
     Room* room1 = new Room("Room 1", "A small room. This is your room.", vector<Item*> {water}, vector<Character*> {});
     Room* room2 = new Room("Room 2", "A small room. This is the room of the captain.", vector<Item*> {bag}, vector<Character*> {});
